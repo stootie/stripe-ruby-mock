@@ -9,6 +9,13 @@ module StripeMock
         klass.add_handler 'get /v1/customers/(.*)/sources/(.*)', :retrieve_source
         klass.add_handler 'delete /v1/customers/(.*)/sources/(.*)', :delete_source
         klass.add_handler 'post /v1/customers/(.*)/sources/(.*)', :update_source
+        klass.add_handler 'post /v1/sources', :create_single_use_source
+      end
+
+      def create_single_use_source(route, method_url, params, headers)
+        route =~ method_url
+
+        card_from_params(params)
       end
 
       def create_source(route, method_url, params, headers)
